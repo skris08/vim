@@ -1,0 +1,246 @@
+
+*******************************************************************************************************************************************************
+								Commands on my shell
+*******************************************************************************************************************************************************
+
+_______________________________________________________________________________________________________________________________________________________
+
+#busybox cross compile:
+_______________________
+
+1. download arm-none-linux-gnueabi-
+
+2. make ARCH=arm CROSS_COMPILE=../../arm/usr/local/arm/4.3.2/bin/arm-none-linux-gnueabi- defconfig
+
+3. make ARCH=arm CROSS_COMPILE=../../arm/usr/local/arm/4.3.2/bin/arm-none-linux-gnueabi- clean & make ARCH=arm CROSS_COMPILE=../../arm/usr/local/arm/4.3.2/bin/arm-none-linux-gnueabi- LDFLAGS=-static
+_______________________________________________________________________________________________________________________________________________________
+
+_______________________________________________________________________________________________________________________________________________________
+
+#l2ping - under construction
+____________________________
+
+1 ./configure --host=/media/mistral/linux/Desktop/factory/arm/usr/local/arm/4.3.2/arm-none-linux-gnueabi PKG_CONFIG_PATH=/media/mistral/linux/Desktop/factory/arm/usr/local/arm/4.3.2/arm-none-linux-gnueabi/libc/armv4t/usr/lib/pkgconfig --disable-systemd --disable-udev --disable-cups --disable-obex --enable-library
+
+
+
+2 ./configure --target=arm-none-eabi --host=arm-none-eabi --prefix=/media/mistral/linux/Desktop/factory/gcc-arm-none-eabi-8-2018-q4-major/bin/arm-none-eabi-gcc
+
+
+3. ./configure --host=arm-linux-gnueabi PKG_CONFIG_PATH=/media/mistral/linux/Desktop/factory/arm/usr/local/arm/4.3.2/arm-none-linux-gnueabi/libc/armv4t/usr/lib/pkgconfig --disable-systemd --disable-udev --disable-cups --disable-obex --enable-library --prefix=/usr/bin/arm-none-linux-gnueabi-gcc
+_______________________________________________________________________________________________________________________________________________________
+
+
+induce adb:
+__________
+
+        echo peripheral > sys/devices/soc/6a00000.ssusb/mode
+
+_______________________________________________________________________________________________________________________________________________________
+
+# Tinymix commands
+__________________
+
+ Runtime.getRuntime().exec(new String[]{"/system/bin/sh", "-c", "tinymix 'AIF1_CAP Mixer SLIM TX6' '1'"});
+
+AMIC: 3 & 1:
+                tinymix 'AIF1_CAP Mixer SLIM TX6' '1' 
+                tinymix 'AIF1_CAP Mixer SLIM TX8' '1' 
+                tinymix 'SLIM_0_TX Channels' 'Two' 
+                tinymix 'SLIM TX8 MUX' 'DEC8' 
+                tinymix 'SLIM TX6 MUX' 'DEC6' 
+                tinymix 'ADC MUX8' 'AMIC' 
+                tinymix 'ADC MUX6' 'AMIC' 
+                tinymix 'AMIC MUX8' 'ADC3' 
+                tinymix 'AMIC MUX6' 'ADC1' 
+                tinymix 'DEC8 Volume' 84 
+                tinymix 'DEC6 Volume' 84  
+                tinymix 'MultiMedia1 Mixer SLIM_0_TX' 1 
+                echo "Recording audio..."
+                timeout -k 8 -s INT 8 tinycap /data/stereo_rec1.wav -c 2 -r 48000 
+
+Headset:
+                tinymix 'SLIMBUS_0_RX Audio Mixer MultiMedia1' 1 
+                tinymix 'SLIM RX0 MUX' AIF_MIX1_PB 
+                tinymix 'SLIM RX1 MUX' AIF_MIX1_PB 
+                tinymix 'SLIM_0_RX Channels' 'Two' 
+                tinymix 'RX INT1_2 MUX' RX0 
+                tinymix 'RX INT2_2 MUX' RX1 
+                tinymix 'RX INT1 DEM MUX' 'CLSH_DSM_OUT' 
+                tinymix 'RX INT2 DEM MUX' 'CLSH_DSM_OUT' 
+                tinyplay /data/stereo_rec.wav
+
+DMIC1:
+		tinymix 'SLIM_0_TX Channels' 'One'
+		tinymix 'AIF1_CAP Mixer SLIM TX7' 1
+		tinymix 'SLIM TX7 MUX' 'DEC7'
+		tinymix 'ADC MUX7' 'DMIC'
+		tinymix 'DMIC MUX7' 'DMIC0'
+		tinymix 'DEC7 Volume' 108
+		tinymix 'IIR0 INP0 MUX' 'DEC7'
+		tinymix 'MultiMedia1 Mixer SLIM_0_TX' 1
+		tinycap /data/dmic.wav -c 1
+
+
+DMIC2:
+                tinymix 'SLIM_0_TX Channels' 'One'
+                tinymix 'AIF1_CAP Mixer SLIM TX7' 1
+                tinymix 'SLIM TX7 MUX' 'DEC7'
+                tinymix 'ADC MUX7' 'DMIC'
+                tinymix 'DMIC MUX7' 'DMIC1'
+                tinymix 'DEC7 Volume' 108
+                tinymix 'IIR0 INP0 MUX' 'DEC7'
+                tinymix 'MultiMedia1 Mixer SLIM_0_TX' 1
+
+                tinymix 'SLIM_0_TX Channels' 'One'
+                tinymix 'AIF1_CAP Mixer SLIM TX7' 1
+                tinymix 'SLIM TX7 MUX' 'DEC7'
+                tinymix 'ADC MUX7' 'DMIC'
+                tinymix 'DMIC MUX7' 'DMIC1'
+                tinymix 'DEC7 Volume' 84
+                tinymix 'MultiMedia1 Mixer SLIM_0_TX' 1
+
+
+De:
+		tinymix 'AIF1_CAP Mixer SLIM TX6' 0
+		tinymix 'AIF1_CAP Mixer SLIM TX8' 0
+		tinymix 'SLIM TX6 MUX' 'ZERO'
+		tinymix 'SLIM TX8 MUX' 'ZERO'
+		tinymix 'ADC MUX6' 'DMIC'
+		tinymix 'ADC MUX8' 'DMIC'
+		tinymix 'AMIC MUX6' 'ZERO'
+		tinymix 'AMIC MUX8' 'ZERO'
+		tinymix 'DEC6 Volume' 0
+		tinymix 'DEC8 Volume' 0
+		tinymix 'MultiMedia1 Mixer SLIM_0_TX' 0
+
+AMCI 2:
+	tinymix 'SLIM_0_TX Channels' 'One' 
+        tinymix 'AIF1_CAP Mixer SLIM TX6' 1 
+        tinymix 'SLIM TX6 MUX' 'DEC6' 
+        tinymix 'ADC MUX6' 'AMIC' 
+        tinymix 'AMIC MUX6' 'ADC1' 
+        tinymix 'DEC6 Volume' 84 
+        tinymix 'MultiMedia1 Mixer SLIM_0_TX' 1 
+
+De:
+	tinymix 'SLIM_0_TX Channels' 'One' 
+        tinymix 'AIF1_CAP Mixer SLIM TX6' 0
+        tinymix 'SLIM TX6 MUX' 'ZERO' 
+        tinymix 'ADC MUX6' 'ZERO' 
+        tinymix 'AMIC MUX6' 'ZERO' 
+        tinymix 'DEC6 Volume' 0
+        tinymix 'MultiMedia1 Mixer SLIM_0_TX' 0
+
+speaker_onboard dual:
+
+        tinymix 'SLIM RX0 MUX' 'AIF_MIX1_PB'
+        tinymix 'SLIM RX1 MUX' 'AIF_MIX1_PB'
+        tinymix 'SLIM_0_RX Channels' 'Two'
+        tinymix 'RX INT5_2 MUX' 'RX1'
+        tinymix 'RX INT6_2 MUX' 'RX0'
+        tinymix 'SLIMBUS_0_RX Audio Mixer MultiMedia1' 1
+        tinymix 'COMP5 Switch' 1
+        tinymix 'COMP6 Switch' 1
+        tinyplay /data/onboard_rec.wav
+
+
+speaker 1:
+
+        tinymix 'SLIM RX0 MUX' 'AIF_MIX1_PB'
+        tinymix 'SLIM RX1 MUX' 'ZERO'
+        tinymix 'SLIM_0_RX Channels' 'One'
+        tinymix 'RX INT5_2 MUX' 'ZERO'
+        tinymix 'RX INT6_2 MUX' 'RX0'
+        tinymix 'SLIMBUS_0_RX Audio Mixer MultiMedia1' 1
+        tinymix 'COMP5 Switch' 0
+        tinymix 'COMP6 Switch' 1
+
+speaker 2:
+
+        tinymix 'SLIM RX0 MUX' 'ZERO'
+        tinymix 'SLIM RX1 MUX' 'AIF_MIX1_PB'
+        tinymix 'SLIM_0_RX Channels' 'One'
+        tinymix 'RX INT5_2 MUX' 'RX1'
+        tinymix 'RX INT6_2 MUX' 'ZERO'
+        tinymix 'SLIMBUS_0_RX Audio Mixer MultiMedia1' 1
+        tinymix 'COMP5 Switch' 1
+        tinymix 'COMP6 Switch' 0
+
+_______________________________________________________________________________________________________________________________________________________
+
+_______________________________________________________________________________________________________________________________________________________
+
+#wpa_cli
+________
+
+wpa_supplicant -d -Dnl80211 -c/etc/wpa_supplicant.conf -iwlan0 -B
+wpa_cli -iwlan0 disconnect
+for i in `wpa_cli -iwlan0 list_networks | grep ^[0-9] | cut -f1`; do wpa_cli -iwlan0 remove_network $i; done
+wpa_cli -iwlan0 add_network
+wpa_cli -iwlan0 set_network 1 auth_alg OPEN
+wpa_cli -iwlan0 set_network 1 key_mgmt NONE
+wpa_cli -iwlan0 set_network 1 mode 0
+wpa_cli -iwlan0 set_network 1 ssid '"TP-LINK_EE93"'
+wpa_cli -iwlan0 select_network 1
+wpa_cli -iwlan0 enable_network 1
+wpa_cli -iwlan0 reassociate
+
+
+wpa_cli -p /data/misc/wifi/iface/ -i wlan0
+
+set_network 0 key_mgmt WPA-PSK
+set_network 0 psk '"vijaikumar"'
+
+wpa_cli -p /data/misc/wifi/iface/ -i wlan0 disconnect
+for i in `wpa_cli -p /data/misc/wifi/iface/ -i wlan0 list_networks | grep ^[0-9] | cut -f1`; do wpa_cli -p /data/misc/wifi/iface/ -i wlan0 remove_network $i; done
+wpa_cli -p /data/misc/wifi/iface/ -i wlan0 add_network
+wpa_cli -p /data/misc/wifi/iface/ -i wlan0 set_network 2 auth_alg OPEN
+wpa_cli -p /data/misc/wifi/iface/ -i wlan0 set_network 2 key_mgmt WPA-PSK
+wpa_cli -p /data/misc/wifi/iface/ -i wlan0 set_network 0 psk "12345678"
+wpa_cli -p /data/misc/wifi/iface/ -i wlan0 set_network 0 pairwise CCMP TKIP
+wpa_cli -p /data/misc/wifi/iface/ -i wlan0 set_network 0 group CCMP TKIP
+wpa_cli -p /data/misc/wifi/iface/ -i wlan0 set_network 0 mode 0
+wpa_cli -p /data/misc/wifi/iface/ -i wlan0 set_network 0 ssid "sk08"
+wpa_cli -p /data/misc/wifi/iface/ -i wlan0 select_network 2
+wpa_cli -p /data/misc/wifi/iface/ -i wlan0 enable_network 2
+wpa_cli -p /data/misc/wifi/iface/ -i wlan0 reassociate
+wpa_cli -p /data/misc/wifi/iface/ -i wlan0 status
+______________________________________________________________________________________________________________________________________________________
+
+
+_______________________________________________________________________________________________________________________________________________________
+
+#LOCAL_FLAG to neglect the errors
+________________________________
+
+LOCAL_CFLAGS += -Wno-error
+
+
+_______________________________________________________________________________________________________________________________________________________
+
+Add new lines b/w each lines
+
+	%s/\(.\)\n\(.\)/\1\r\r\2/
+
+Delete lines except the string 
+
+	v/i2c_write/d
+
+Delete alternate white lines 
+
+	:%!awk -- '++c\%2'
+
+Delete all lines in vim
+
+	:1,$d
+
+Delete spaces b/w strings
+
+	:'<,'>:s/\s\+/ /g
+
+intent
+
+	select lines using CTRL + V and use " le 1 "
+
+_______________________________________________________________________________________________________________________________________________________
