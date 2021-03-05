@@ -1,0 +1,23 @@
+Add new lines b/w each lines
+
+	%s/\(.\)\n\(.\)/\1\r\r\2/
+
+Delete lines except the string 
+
+	v/i2c_write/d
+
+Delete alternate white lines 
+
+	:%!awk -- '++c\%2'
+
+Delete all lines in vim
+
+	:1,$d
+
+Delete spaces b/w strings
+
+	:'<,'>:s/\s\+/ /g
+
+intent
+
+	select lines using CTRL + V and use " le 1 "
