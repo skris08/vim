@@ -10,30 +10,30 @@ Find the commands explored on the VIM codes
 ### Adding new lines bewteen each line:
 
 ```
-`%s/\(.\)\n\(.\)/\1\r\r\2/`
+%s/\(.\)\n\(.\)/\1\r\r\2/
 ```
 
 ### Delete lines except the string:
 
 ```
-`:%!awk -- '++c\%2'`
+:%!awk -- '++c\%2
 ```
 
 
 ### Delete all lines in vim:
 
 ```
-`:1,$d`
+:1,$d
 ```
 
 ### Delete spaces b/w strings:
 
 ```
-`:'<,'>:s/\s\+/ /g`
+:'<,'>:s/\s\+/ /g
 ```
 
 ### intent:
 
 ```
-`select lines using CTRL + V and use " le 1 "`
+select lines using CTRL + V and use " le 1 "
 ```
