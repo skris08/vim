@@ -244,3 +244,6 @@ intent
 	select lines using CTRL + V and use " le 1 "
 
 _______________________________________________________________________________________________________________________________________________________
+
+Board to suspend from Console:
+echo mem > /sys/power/state
